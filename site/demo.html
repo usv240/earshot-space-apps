@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Earshot demo video page. Written with AI assistance (Claude). See README, "Use of AI". -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earshot: the 30-second demo</title>
+<meta name="description" content="A 29-second demo of Earshot: NASA's Earth maps played as music for people who cannot see the picture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bone: #e6e0d2; --ink: #141413; --yellow: #f2c21a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink); color: var(--bone); font-family: 'Outfit', 'Avenir Next', 'Segoe UI', system-ui, sans-serif; font-size: 1.125rem; line-height: 1.5; }
+  main { max-width: 1100px; margin: 0 auto; padding: clamp(16px, 4vw, 48px); display: grid; gap: 24px; }
+  h1 { margin: 0; font-size: clamp(2rem, 6vw, 4rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+  h2 { margin: 12px 0 0; font-size: 1.4rem; font-weight: 600; }
+  video { width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; display: block; }
+  p, ol { margin: 0; max-width: 46em; }
+  ol { padding-left: 1.3em; display: grid; gap: 8px; }
+  a { color: var(--yellow); }
+  a:focus-visible, video:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+  .small { font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Earshot, in 29 seconds.</h1>
+  <video controls preload="metadata" src="demo.mp4" aria-describedby="transcript"></video>
+  <p><a href="./">Open Earshot and press play</a>, or see it in <a href="slides.html">seven slides</a>.</p>
+  <h2>What happens in the video</h2>
+  <ol id="transcript">
+    <li>A voice says: "NASA shows our planet in pictures. Earshot lets you hear them." The picture is NASA's map of the Earth's lights at night in 2023. A caption says that about 28,000 people in Charlotte are blind or have serious difficulty seeing (US Census Bureau, 2024).</li>
+    <li>NASA's map of ocean currents, coloured by temperature, plays as sound for five seconds. A line sweeps the map from west to east as the sound moves from the left ear to the right. Low notes are the far south and high notes the far north. Warmer water is louder and brighter. A hiss marks land, where this map has no data.</li>
+    <li>NASA's map of the Earth's lights at night plays as one sweep made only of the rise between 2012 and 2023: silent where nothing changed, loudest where light grew most.</li>
+    <li>A voice reads what Earshot worked out from the numbers: "The largest rise in light at night, from 2012 to 2023, was over the Indian subcontinent."</li>
+    <li>A screenshot of Earshot shows the area around Charlotte, with a dot for the city. A voice says: "It can also play the area around your own city, every day."</li>
+    <li>A closing card, read aloud: "Built on published research with blind listeners. By Team USV." It also names the challenge, The Earth Information Jukebox, and the site's address.</li>
+  </ol>
+  <p class="small">Every sound in the video is computed from NASA data by Earshot's own engine. The narration is a computer voice. The video was assembled by a script written with AI assistance; no picture or sound in it was made by generative AI. Pictures: NASA Scientific Visualization Studio (SVS 5313 and SVS 3912), and a screenshot of Earshot showing NASA GIBS data. Earshot is by Team USV for the 2026 NASA Space Apps Challenge and is not made or endorsed by NASA.</p>
+</main>
+</body>
+</html>

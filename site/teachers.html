@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- Earshot teachers' guide. Written with AI assistance (Claude). See README, "Use of AI". -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earshot: a class for teachers</title>
+<meta name="description" content="A twenty-minute class with Earshot: students who are blind, have low vision or can see well listen to NASA's Earth maps together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bone: #e6e0d2; --ink: #141413; --green: #18bc42; --soft: #4a4740; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bone); color: var(--ink); font-family: 'Outfit', 'Avenir Next', 'Segoe UI', system-ui, sans-serif; font-size: 1.125rem; line-height: 1.55; }
+  main { max-width: 860px; margin: 0 auto; padding: clamp(16px, 4vw, 56px); display: grid; gap: 22px; }
+  h1 { margin: 0; font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+  h2 { margin: 18px 0 0; font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  p, ol, ul { margin: 0; }
+  ol, ul { padding-left: 1.3em; display: grid; gap: 10px; }
+  .step { display: grid; gap: 8px; padding: 20px 22px; background: #fff8ea; }
+  .step h2 { margin: 0; }
+  .time { font-weight: 600; color: var(--soft); }
+  .say { font-weight: 500; }
+  a { color: inherit; font-weight: 600; }
+  a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .small { font-size: 0.95rem; color: var(--soft); }
+  @media print { body { background: #fff; } .step { background: #fff; border: 1px solid #999; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>A twenty-minute class with Earshot.</h1>
+  <p>Students who are blind, have low vision or see well can do every step together, by ear. The right answers come from NASA's data and are shown on the page, so you do not need to be an expert. For ages ten and up.</p>
+  <p><strong>You need:</strong> <a href="./">Earshot</a> open in a browser, speakers or headphones (headphones make left and right clearer), and ideally a globe or a raised-line world map.</p>
+
+  <section class="step" aria-labelledby="s1">
+    <h2 id="s1">1. How a map can sound</h2>
+    <p class="time">3 minutes</p>
+    <p class="say">Say: "NASA watches our planet from space and shows what it sees as pictures. Today we will listen to those pictures instead."</p>
+    <p>Explain the three rules: low notes are the south of the planet and high notes the north; the sound travels from west to east, from your left ear to your right; louder means more. Then press "Hear the eight voices" in "How it works" so everyone hears the notes climb from south to north.</p>
+  </section>
+
+  <section class="step" aria-labelledby="s2">
+    <h2 id="s2">2. Where is the ocean warm?</h2>
+    <p class="time">4 minutes</p>
+    <p>Choose "Sea temperature" and press "Play this record". Ask everyone to point, or say, which voices were loudest: the high notes, the low notes or the middle ones.</p>
+    <p><strong>Answer:</strong> the middle voices, around the equator, where the sea is warmest. A hiss means land, where this map has no sea. Press "Read it aloud" to hear the briefing confirm it.</p>
+  </section>
+
+  <section class="step" aria-labelledby="s3">
+    <h2 id="s3">3. How has the world changed?</h2>
+    <p class="time">5 minutes</p>
+    <p>Choose "Night lights". Press "Play all 12 in order" to hear every year from 2012 to 2023. Then press "Hear only what changed": now only the places where light grew make a sound.</p>
+    <p><strong>Ask:</strong> "Where did the most light appear?" Earshot then says it in words. <strong>Discuss:</strong> what makes a place brighter at night? Growing towns, new roads, more homes with electricity.</p>
+  </section>
+
+  <section class="step" aria-labelledby="s4">
+    <h2 id="s4">4. What is around us today?</h2>
+    <p class="time">4 minutes</p>
+    <p>Choose "Haze" or "Smoke and dust". Type your own town in "Ask about one place" and press "Hear it", then press "Hear the area around" your town. A soft chime rings as the sound passes your town.</p>
+    <p><strong>Ask:</strong> "Is there more to the north or the south of us?" Earshot then says how far away the most is, and in which direction.</p>
+  </section>
+
+  <section class="step" aria-labelledby="s5">
+    <h2 id="s5">5. Test your ears</h2>
+    <p class="time">4 minutes</p>
+    <p>Everyone closes their eyes. Press "Start the check" in "Can you hear the map?". Three short maps play, and the class answers each question together. At the end, compare the class's score with what guessing would score.</p>
+  </section>
+
+  <h2>To take it further</h2>
+  <ul>
+    <li>Students write down a measurement for several cities, such as today's temperature, as a table with the columns lat, lon and value, and drop it into "Bring your own map" to hear their own data.</li>
+    <li>Download a map's sound, send it to a classmate, and have them drop it back into Earshot: the map comes back from the sound alone.</li>
+    <li>Subscribe to the daily feed for your town in a podcast app and listen each morning for a week. What changes?</li>
+  </ul>
+
+  <h2>For students who are blind or have low vision</h2>
+  <ul>
+    <li>Every control works from the keyboard. On the world map, the arrow keys move and Enter speaks the place and the value.</li>
+    <li>If a student uses a screen reader, leave the page voice off: the screen reader reads every answer.</li>
+    <li>"One band at a time" in the Voices setting plays each part of the planet on its own, which is easier for a first listen.</li>
+    <li>Each picture is described in words under "What the picture looks like".</li>
+  </ul>
+
+  <p class="small">Earshot is free and open source, by Team USV for the 2026 NASA Space Apps Challenge. It was written with AI assistance. NASA data and pictures are from NASA's Earth Information Center and GIBS. Earshot is not made or endorsed by NASA. <a href="./">Back to Earshot</a></p>
+</main>
+</body>
+</html>

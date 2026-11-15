@@ -1,0 +1,195 @@
+<!doctype html>
+<!-- Earshot demo: seven slides. Written with AI assistance (Claude). Pictures are NASA's. No AI-generated images. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earshot: seven slides</title>
+<meta name="description" content="Earshot in seven slides: NASA's Earth maps played as music for people who cannot see the picture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bone: #e6e0d2; --ink: #141413; --coral: #ed4b44; --green: #18bc42; --yellow: #f2c21a; }
+  * { box-sizing: border-box; }
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; font-family: 'Outfit', 'Avenir Next', 'Segoe UI', system-ui, sans-serif; font-size: clamp(1.0625rem, 0.9rem + 0.7vw, 1.6rem); line-height: 1.4; color: var(--ink); background: var(--ink); }
+  section { min-height: 100svh; scroll-snap-align: start; padding: clamp(20px, 4vw, 64px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(14px, 2vw, 32px); align-content: center; align-items: center; position: relative; }
+  h1, h2 { margin: 0; font-weight: 600; letter-spacing: -0.03em; line-height: 1; text-wrap: balance; }
+  h1 { font-size: clamp(2.2rem, 5.6vw, 5.2rem); }
+  h2 { font-size: clamp(2rem, 5.2vw, 4.6rem); }
+  p { margin: 0; max-width: 34em; }
+  .text { grid-column: 1 / span 6; display: grid; gap: clamp(14px, 2vw, 28px); }
+  .pic { grid-column: 7 / -1; margin: 0; }
+  .wide { grid-column: 1 / -1; }
+  img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; background: #000; }
+  figcaption, .small { font-size: max(0.62em, 15px); line-height: 1.45; margin-top: 10px; }
+  .n { position: absolute; right: clamp(20px, 4vw, 64px); bottom: clamp(16px, 3vw, 40px); font-size: max(0.62em, 15px); font-weight: 500; }
+  .mark { position: absolute; left: clamp(20px, 4vw, 64px); top: clamp(16px, 3vw, 40px); font-weight: 600; letter-spacing: -0.02em; }
+  .dark { background: var(--ink); color: var(--bone); }
+  .bone { background: var(--bone); }
+  .coral { background: var(--coral); }
+  .green { background: var(--green); }
+  .yellow { background: var(--yellow); }
+  .big { font-size: clamp(2.4rem, 6.5vw, 6rem); font-weight: 600; letter-spacing: -0.04em; line-height: 0.95; font-variant-numeric: tabular-nums; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.5em; }
+  li { padding-left: 1.1em; position: relative; }
+  li::before { content: ''; position: absolute; left: 0; top: 0.5em; width: 0.5em; height: 0.5em; background: currentColor; }
+  .bands { position: relative; }
+  .bands ol { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; display: grid; grid-template-rows: repeat(8, 1fr); }
+  .bands li { padding: 0; display: flex; align-items: stretch; font-size: max(0.55em, 13px); font-weight: 600; color: #fff; }
+  .bands li span { display: flex; align-items: center; padding: 0 10px; background: rgba(0, 0, 0, 0.62); min-width: 11.5em; }
+  .bands li:nth-child(even) span { background: rgba(0, 0, 0, 0.82); }
+  .bands li::before { display: none; }
+  .pair { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.5vw, 24px); }
+  .three { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 32px); align-items: start; }
+  .three > div { display: grid; gap: 10px; }
+  a { color: inherit; }
+  button { font: inherit; font-weight: 600; padding: 0.6em 1em; border: 0; background: var(--ink); color: var(--bone); cursor: pointer; }
+  button:focus-visible, a:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+  button:active { transform: scale(0.97); }
+  @media (max-width: 820px) { .text, .pic { grid-column: 1 / -1; } .three, .pair { grid-template-columns: 1fr; } .n { display: none; } section { align-content: center; padding-top: 64px; } }
+  @media print { html { scroll-snap-type: none; } section { min-height: 0; height: 100vh; page-break-after: always; } @page { size: landscape; margin: 0; } }
+</style>
+</head>
+<body>
+
+<section class="dark" aria-label="Slide 1 of 7">
+  <span class="mark">Earshot, by Team USV</span>
+  <div class="text">
+    <h1>Hear NASA's Earth maps.</h1>
+    <p>NASA's maps of the planet, played as music made to be read by ear. Built for people who cannot see the picture.</p>
+    <p class="small">Team USV.<br>2026 NASA Space Apps Challenge, Charlotte. Challenge: The Earth Information Jukebox.</p>
+  </div>
+  <figure class="pic"><img src="records/eic/5313/show12.jpg" alt="NASA's map of the Earth's lights at night in 2023."><figcaption>NASA Earth Information Center, "Change in Night Lights between 2012 and 2023" (SVS 5313), the 2023 frame.</figcaption></figure>
+  <span class="n">1 / 7</span>
+</section>
+
+<section class="coral" aria-label="Slide 2 of 7">
+  <div class="text">
+    <h2>The planet's story is told in pictures.</h2>
+    <p>NASA's Earth Information Center shows a changing planet on a wall of screens. If you cannot see the screen, you get a caption, or nothing.</p>
+  </div>
+  <div class="pic" style="display:grid;gap:clamp(14px,2vw,28px)">
+    <p><span class="big">28,000</span><br>people in Charlotte are blind or have serious difficulty seeing, even with glasses.</p>
+    <p><span class="big">43 million</span><br>people worldwide are blind, and 295 million more have moderate or severe vision impairment.</p>
+    <p class="small">US Census Bureau, American Community Survey 2024, table B18103 (Charlotte; 8.6 million across the United States). Worldwide figures for 2020: GBD 2019 Blindness and Vision Impairment Collaborators, The Lancet Global Health, 2021.</p>
+  </div>
+  <span class="n">2 / 7</span>
+</section>
+
+<section class="yellow" aria-label="Slide 3 of 7">
+  <div class="text">
+    <h2>Eight bands, eight voices.</h2>
+    <ul>
+      <li>Low notes are the south, high notes are the north. Four voices to start, eight for detail.</li>
+      <li>Louder means more: more light, smoke, rain or heat.</li>
+      <li>The sound sweeps west to east, from your left ear to your right.</li>
+      <li>A hiss means the map has no data there.</li>
+    </ul>
+    <p><button id="hear" type="button">Hear this map, 12 seconds</button> <span id="hear-note" class="small" role="status"></span></p>
+  </div>
+  <figure class="pic">
+    <div class="bands"><img src="records/eic/3912/f04.jpg" alt="NASA's map of ocean currents coloured by temperature, with eight horizontal bands marked on it.">
+      <ol aria-hidden="true"><li><span>A, highest: Arctic</span></li><li><span>E</span></li><li><span>B</span></li><li><span>F sharp</span></li><li><span>C sharp</span></li><li><span>A</span></li><li><span>E</span></li><li><span>A, lowest: Antarctic</span></li></ol></div>
+    <figcaption>NASA Earth Information Center, "Global Sea Surface Currents and Temperature" (SVS 3912). The notes form one consonant chord, so any mix sounds settled.</figcaption>
+  </figure>
+  <span class="n">3 / 7</span>
+</section>
+
+<section class="dark" aria-label="Slide 4 of 7">
+  <div class="wide" style="display:grid;gap:clamp(14px,2vw,28px)">
+    <h2>Every NASA map gets its own instrument.</h2>
+    <div class="pair">
+      <figure style="margin:0"><img src="records/eic/5669/f01.jpg" alt="NASA's map of four kinds of aerosol as glowing swirls: pink dust, orange smoke, green sulfate and blue-grey sea salt."><figcaption>Aerosols, four kinds (SVS 5669): dust as a reed, smoke as brass, sulfate as strings, sea salt as glass.</figcaption></figure>
+      <figure style="margin:0"><img src="records/eic/5011/f07.jpg" alt="NASA's map of lightning seen from the International Space Station, as yellow dots on a dark world map."><figcaption>Lightning through a year (SVS 5011): a crackle that speeds up where flashes cluster.</figcaption></figure>
+    </div>
+    <p>Five Earth Information Center visualizations, plus rain, smoke, haze and sea temperature fetched from NASA for the newest day. The sound is computed in the browser the moment you press play.</p>
+  </div>
+  <span class="n">4 / 7</span>
+</section>
+
+<section class="green" aria-label="Slide 5 of 7">
+  <div class="text">
+    <h2>Hear the planet change.</h2>
+    <p>Press "Play all 12 in order" and twelve years of night lights play in under a minute at one shared volume. Then Earshot says what changed, worked out from the numbers:</p>
+    <p style="font-weight:600">"From 2012 to 2023, light at night rose across the map as a whole. The largest rise was over the Indian subcontinent."</p>
+  </div>
+  <div class="pic" style="display:grid;gap:14px">
+    <figure style="margin:0"><img src="records/eic/5313/show01.jpg" alt="NASA's map of night lights in 2012."><figcaption>2012</figcaption></figure>
+    <figure style="margin:0"><img src="records/eic/5313/show12.jpg" alt="NASA's map of night lights in 2023."><figcaption>2023. NASA Black Marble, SVS 5313.</figcaption></figure>
+  </div>
+  <span class="n">5 / 7</span>
+</section>
+
+<section class="bone" aria-label="Slide 6 of 7">
+  <div class="wide" style="display:grid;gap:clamp(18px,2.4vw,36px)">
+    <h2>Built on evidence, checked by machine.</h2>
+    <div class="three">
+      <div><span class="big">0.998</span><p>or better. A second program is given only the audio and rebuilds the map. That is its match with the original on every record tested.</p></div>
+      <div><span class="big">95%</span><p>of geography tasks were completed by seven blind users of a sound map with a sweep, speech and keyboard exploring, against 33% with a spreadsheet (Zhao and others, 2008). That tool carried values in pitch; Earshot uses the same sweep, speech and keyboard, with loudness and brightness.</p></div>
+      <div><span class="big">100%</span><p>of data pixels on the day-by-day maps match NASA's own colour table exactly, so no value is guessed.</p></div>
+    </div>
+  </div>
+  <span class="n">6 / 7</span>
+</section>
+
+<section class="dark" aria-label="Slide 7 of 7">
+  <div class="text">
+    <h2>Open, honest and ready to reuse.</h2>
+    <ul>
+      <li>Built for a screen reader, a keyboard, touch and vibration.</li>
+      <li>The area around your own city, every day, as a podcast feed.</li>
+      <li>Bring your own map or table. It never leaves your browser.</li>
+      <li>One JavaScript file, an HTTP API with free keys, and an MCP server.</li>
+      <li>Apache 2.0. Every NASA source and its visualizers are credited on the page.</li>
+    </ul>
+  </div>
+  <div class="pic" style="display:grid;gap:clamp(12px,1.6vw,22px)">
+    <p><a href="./">Open Earshot and press play.</a></p>
+    <p class="small">Use of AI: an AI assistant (Claude) researched, proposed approaches and wrote most of the code and text, including these slides, under the team's direction. No image, video or sound was made by generative AI. Every sound is computed from NASA data. Pictures are NASA's, from the Scientific Visualization Studio. Earshot is not made or endorsed by NASA.</p>
+  </div>
+  <span class="n">7 / 7</span>
+</section>
+
+<script>
+  // Arrow keys and Page Up / Page Down move one slide at a time.
+  addEventListener('keydown', function (ev) {
+    var d = ev.key === 'ArrowRight' || ev.key === 'ArrowDown' || ev.key === 'PageDown' || ev.key === ' ' ? 1 : ev.key === 'ArrowLeft' || ev.key === 'ArrowUp' || ev.key === 'PageUp' ? -1 : 0;
+    if (!d) return;
+    ev.preventDefault();
+    var s = document.querySelectorAll('section'), i = Math.round(scrollY / innerHeight);
+    s[Math.max(0, Math.min(s.length - 1, i + d))].scrollIntoView();
+  });
+</script>
+<script type="module">
+  // Slide 3 plays the real sound of the map it shows, computed here from NASA's picture by the same engine as the site.
+  import * as E from './engine/earshot.js';
+  import { EIC_RECORDS } from './data/eic.js';
+  const btn = document.getElementById('hear'), note = document.getElementById('hear-note');
+  let ctx = null, node = null;
+  btn.addEventListener('click', async () => {
+    if (node) { node.onended = null; node.stop(); node = null; btn.textContent = 'Hear this map, 12 seconds'; return; }
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      await ctx.resume();
+      const rec = EIC_RECORDS.find((r) => r.id === 'currents');
+      const img = await new Promise((ok, no) => { const im = new Image(); im.onload = () => ok(im); im.onerror = no; im.src = 'records/eic/3912/f04.jpg'; });
+      const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+      const x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, 1024, 512);
+      const scale = E.scaleFromStops(rec.stops.map(([r, g, b, value]) => ({ r, g, b, value })));
+      const f = E.decode(x.getImageData(0, 0, 1024, 512).data, 1024, 512, scale, { tolerance: rec.tolerance });
+      const levels = E.toLevels(E.toGrid(f.values, f.valid, 1024, 512), rec.lo, rec.hi, 0.08, rec.curve);
+      const a = E.sonify(levels, { seconds: 12, timbre: 'glass' });
+      const buf = ctx.createBuffer(2, a.left.length, a.sampleRate);
+      buf.copyToChannel(a.left, 0); buf.copyToChannel(a.right, 1);
+      node = ctx.createBufferSource(); node.buffer = buf; node.connect(ctx.destination);
+      node.onended = () => { node = null; btn.textContent = 'Hear this map, 12 seconds'; };
+      node.start(); btn.textContent = 'Stop';
+      note.textContent = 'Warm water around the equator is the loud middle voices. The hiss is land, where this map has no sea temperature.';
+    } catch (err) { note.textContent = 'The sound could not be made here. Open the site and press play.'; }
+  });
+</script>
+</body>
+</html>

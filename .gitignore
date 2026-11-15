@@ -1,0 +1,10 @@
+server/keys.json
+server/listening.json
+server/run.log
+node_modules/
+.taste-skill/
+deploy/
+docs/PLAN.md
+*.log
+.DS_Store
+Thumbs.db

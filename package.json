@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "name": "earshot",
+  "private": true,
+  "version": "0.1.0",
+  "description": "NASA's Earth maps you can hear, for people who are blind or have low vision.",
+  "license": "Apache-2.0",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server/server.mjs",
+    "test": "node test/roundtrip.test.mjs",
+    "mcp": "node mcp/earshot-mcp.mjs"
+  }
+}

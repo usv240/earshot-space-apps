@@ -1,0 +1,531 @@
+<!doctype html>
+<!-- Earshot. Written with AI assistance (Claude). See README, "Use of AI". -->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earshot: hear NASA's maps of the Earth</title>
+<meta name="description" content="Earshot plays NASA's Earth maps as music you can read by ear, for people who cannot see the picture: voices that run from the South Pole to the North.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#jukebox">Skip to the player</a>
+
+<header class="hero" id="top">
+  <div class="hero-panel">
+    <div class="hero-top">
+      <a class="wordmark" href="#top">Earshot</a>
+      <div class="row hero-tools">
+        <button id="voice" class="quiet" type="button" aria-pressed="false"><span id="voice-label">Page voice: off</span></button>
+        <button class="info" type="button" data-info="voice" aria-label="What is the page voice, and when should I turn it off?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        <button id="theme" class="quiet" type="button" aria-pressed="false"><span id="theme-label">Dark mode</span></button>
+      </div>
+    </div>
+    <h1>Hear NASA's Earth maps.</h1>
+    <div class="hero-side">
+      <p class="lead">Rain, smoke, city lights and ocean heat reach most of us as pictures. Earshot plays each NASA map as music made to be read by ear: voices that run from the South Pole to the North, sweeping west to east. It is built for people who cannot see the picture.</p>
+      <div class="hero-act">
+        <button class="btn" type="button" data-play="Play the map" disabled><span class="label">Play the map</span></button>
+        <button class="info" type="button" data-info="play" aria-label="What happens when I press play?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <p class="hero-fact"><span class="strong">About 28,000 people in Charlotte</span> are blind or have serious difficulty seeing, even with glasses. Across the United States, 8.6 million. <a href="https://censusreporter.org/data/table/?table=B18103&geo_ids=16000US3712000,01000US">US Census Bureau, 2024</a></p>
+    </div>
+    <div class="hero-view" data-ui>
+      <canvas id="hero-map" data-map role="img" aria-label="The NASA map that is loaded now. Press Play the map to hear it."></canvas>
+    </div>
+    <div class="hero-now">
+      <p id="hero-line" class="strong">Loading the newest map</p>
+      <p id="hero-brief"></p>
+      <p class="status" data-status role="status" hidden></p>
+      <p id="hero-ears"><a href="demo.html">Watch the 30-second demo</a>, or <a href="#ears">close your eyes and take the one-minute listening check.</a></p>
+    </div>
+  </div>
+  <nav class="swatches" aria-label="On this page">
+    <a class="f-coral" href="#jukebox">Play a record</a>
+    <a class="f-green" href="#place-section">Ask about a place</a>
+    <a class="f-yellow" href="#ears">Test your ears</a>
+    <a class="f-bone" href="#research">The research</a>
+    <a class="f-ink" href="#proof">The proof</a>
+    <a class="f-green" href="#yours">Your own data</a>
+    <a class="f-coral" href="#build">Build with it</a>
+  </nav>
+</header>
+
+<main>
+<section class="field f-ink" id="jukebox" aria-labelledby="h-jukebox">
+  <div class="grid plate">
+    <div class="plate-disc" data-rise>
+      <canvas id="disc" role="img" aria-label="The current map drawn as a record. Each ring is one band of latitude, with the Antarctic at the centre and the Arctic at the rim."></canvas>
+    </div>
+    <div class="plate-text">
+      <div class="heading-row" data-rise>
+        <h2 id="h-jukebox">Pick a record.</h2>
+        <button class="info" type="button" data-info="records" aria-label="What is a record?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <div id="record-tabs" class="tabs" role="group" aria-label="Records" data-rise></div>
+      <div class="row" data-rise>
+        <button id="play-all" class="quiet" type="button">Play the whole jukebox</button>
+        <button class="info" type="button" data-info="jukebox" aria-label="What does playing the whole jukebox do?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <div class="plate-body" data-rise>
+        <h3 id="rec-title">Smoke and dust</h3>
+        <p id="rec-about"></p>
+        <p id="rec-source" class="note" aria-live="polite"></p>
+        <p id="rec-sound" class="note"></p>
+        <div class="controls">
+          <div class="ctl">
+            <label for="date">Day</label>
+            <div class="row"><input type="date" id="date"><button class="info" type="button" data-info="date" aria-label="Which days can I choose?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+            <span id="date-note" class="note"></span>
+          </div>
+          <div class="ctl">
+            <label for="speed">Length</label>
+            <div class="row"><select id="speed">
+              <option value="8">8 seconds</option>
+              <option value="12" selected>12 seconds</option>
+              <option value="24">24 seconds</option>
+            </select><button class="info" type="button" data-info="speed" aria-label="Why would I change the length?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+          </div>
+          <div class="ctl">
+            <label for="voices">Voices</label>
+            <div class="row"><select id="voices">
+              <option value="4" selected>Four together</option>
+              <option value="solo">One band at a time, easiest</option>
+              <option value="8">Eight, for detail</option>
+            </select><button class="info" type="button" data-info="simple" aria-label="Why would I choose four voices?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+          </div>
+          <div class="ctl">
+            <label for="timbre">Instrument</label>
+            <div class="row"><select id="timbre">
+              <option value="" selected>This record's own</option>
+              <option value="choir">Soft choir</option>
+              <option value="glass">Glass</option>
+              <option value="reed">Hollow reed</option>
+              <option value="string">Bright strings</option>
+              <option value="brass">Warm brass</option>
+              <option value="flute">Airy flute</option>
+            </select><button class="info" type="button" data-info="timbre" aria-label="Why can I change the instrument?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+          </div>
+          <div class="ctl" id="frame-ctl" hidden>
+            <label for="frame">Moment</label>
+            <div class="row"><select id="frame"></select><button class="info" type="button" data-info="frames" aria-label="What are the moments?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+          </div>
+          <div class="ctl" hidden>
+            <div class="row"><label class="check"><input type="checkbox" id="haptic"> Vibrate with the sound</label><button class="info" type="button" data-info="haptic" aria-label="What does vibration add?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="cells" data-rise>
+        <button class="cell cell-main" type="button" data-play="Play this record" disabled><span class="label">Play this record</span></button>
+        <button class="cell" type="button" id="play-time" hidden>Play it through time</button>
+        <button class="cell" type="button" id="play-change" hidden aria-describedby="change-help">Hear only what changed</button>
+        <button class="cell" type="button" data-download="wav">Download the sound</button>
+      </div>
+      <p class="status" data-status role="status" hidden></p>
+      <p id="rec-change" class="result" aria-live="polite"></p>
+      <p id="change-help" class="sr">Plays one sweep made only of the rise between the first and last moment. Places that did not change are silent.</p>
+      <div class="plate-body">
+        <div id="rec-describe-wrap" hidden>
+          <h4>What the picture looks like</h4>
+          <p id="rec-describe"></p>
+        </div>
+        <h4>Good to know about this record</h4>
+        <ul id="rec-limits" class="plain"></ul>
+        <p id="rec-credit" class="note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="field f-green" id="place-section" aria-labelledby="h-place">
+  <div class="grid">
+    <div class="heading-row wide" data-rise>
+      <h2 id="h-place">Ask about one place.</h2>
+      <button class="info" type="button" data-info="explore" aria-label="How do I explore the map?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+    </div>
+    <div class="place-map" data-ui data-rise>
+      <canvas id="map" data-map tabindex="0" role="application" aria-label="World map. Arrow keys move five degrees, with Shift one degree. Enter speaks the place under the cursor." aria-describedby="place-result"></canvas>
+      <p id="place-result" class="result" aria-live="polite">Move over the map, or type a place, to hear one spot.</p>
+      <div class="area">
+        <div class="heading-row">
+          <h3 id="h-area">Is it smoky, hazy or raining near me?</h3>
+          <button class="info" type="button" data-info="area" aria-label="What does the area around you play?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <p>A sound map of about 6,000 by 3,000 kilometres with your place in the middle. A soft chime rings as the sweep passes you. Then Earshot says how far away the most is, and in which direction.</p>
+        <div class="row wrap">
+          <button id="area-play" class="btn" type="button" disabled>Hear the area around Charlotte</button>
+          <a id="area-feed" href="api/v1/feed.xml?place=Charlotte">Get it every day in a podcast app</a>
+          <button class="info" type="button" data-info="feed" aria-label="How does the daily podcast work?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <canvas id="area-map" role="img" aria-labelledby="h-area" aria-describedby="area-text"></canvas>
+        <p id="area-text" class="result" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="place-tools">
+      <form id="place-form" data-rise>
+        <label for="place">A city, or latitude and longitude</label>
+        <div class="row">
+          <input id="place" type="text" autocomplete="off" placeholder="Charlotte" enterkeyhint="go">
+          <button class="btn" type="submit">Hear it</button>
+          <button class="info" type="button" data-info="place" aria-label="Which places does it know?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <button id="locate" class="quiet" type="button">Use where I am now</button>
+      </form>
+      <form id="ask-form" data-rise>
+        <label for="ask">A question about this map</label>
+        <div class="row">
+          <input id="ask" type="text" autocomplete="off" placeholder="Where is it worst?" enterkeyhint="send">
+          <button class="btn" type="submit">Ask</button>
+          <button id="mic" class="quiet" type="button" aria-pressed="false" hidden>Speak</button>
+          <button class="info" type="button" data-info="ask" aria-label="What can I ask?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <p id="answer" class="result" aria-live="polite"></p>
+      </form>
+      <div data-rise>
+        <div class="heading-row">
+          <h3>The briefing</h3>
+          <button class="info" type="button" data-info="briefing" aria-label="Who writes the briefing?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <p id="brief-text"></p>
+        <div class="row">
+          <button id="speak-brief" class="btn" type="button">Read it aloud</button>
+          <button id="debate" class="quiet" type="button">Hear two readings</button>
+          <button class="info" type="button" data-info="debate" aria-label="What are the two readings?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </div>
+        <ol id="debate-text" class="plain turns" aria-live="polite"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="field f-coral" id="ears" aria-labelledby="h-ears">
+  <div class="grid ears">
+    <div class="ears-head" data-rise>
+      <div class="heading-row">
+        <h2 id="h-ears">Can you hear the map?</h2>
+        <button class="info" type="button" data-info="ears" aria-label="How does the listening check work?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <p class="lead">Close your eyes. Three short clips, about a minute in all. Each clip is a real NASA map that you are not shown, and after each one you answer by ear. If you do not use a screen reader, turn on the page voice first so the questions are read to you.</p>
+      <p id="ears-tally" class="strong" aria-live="polite"></p>
+    </div>
+    <div class="ears-box" data-ui>
+      <p id="ears-step" class="strong" role="status" tabindex="-1">Ready when you are. Low notes are the south, high notes are the north. The sound starts in your left ear, in the Pacific, and travels east.</p>
+      <div class="row wrap">
+        <button id="ears-start" class="btn" type="button">Start the check</button>
+        <button id="ears-replay" class="quiet" type="button" hidden>Play the clip again</button>
+      </div>
+      <fieldset id="ears-q" hidden>
+        <legend id="ears-question"></legend>
+        <div id="ears-options" class="row wrap"></div>
+      </fieldset>
+      <p id="ears-feedback" class="result" aria-live="polite" tabindex="-1"></p>
+      <div id="ears-share" hidden>
+        <label class="check"><input type="checkbox" id="ears-eyes"> I kept my eyes closed, or I cannot see the screen</label>
+        <label class="check"><input type="checkbox" id="ears-blv"> I am blind or have low vision</label>
+        <div class="row wrap">
+          <button id="ears-send" class="btn" type="button">Add my score to the count</button>
+          <button id="ears-save" class="quiet" type="button">Save my answers</button>
+        </div>
+        <p class="note">Only your score and these two ticks are stored. No name, no address and nothing about your device.</p>
+      </div>
+    </div>
+    <ul class="plain ears-score" aria-label="Listening results so far" hidden>
+      <li><span class="num" id="es-n">0</span> listeners counted so far</li>
+      <li><span class="num" id="es-right">none yet</span> answers right, by ear alone</li>
+      <li><span class="num" id="es-chance">about 45 percent</span> is what guessing would score</li>
+    </ul>
+  </div>
+</section>
+
+<section class="field f-bone" id="research" aria-labelledby="h-research">
+  <div class="grid research">
+    <div class="research-head" data-rise>
+      <div class="heading-row">
+        <h2 id="h-research">Built on what studies found.</h2>
+        <button class="info" type="button" data-info="research" aria-label="How was the research used?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <p class="lead">Researchers have tested sound maps with blind and sighted listeners for more than fifteen years. Earshot is built on what they measured, including the parts that told us to change the design.</p>
+    </div>
+    <ul class="plain ears-score">
+      <li><span class="num">95 percent</span> of geography tasks were completed by seven blind users with a sound map that combined a sweep, speech and keyboard exploring, with pitch carrying the values. With a spreadsheet they completed 33 percent. <span class="note">Zhao, Plaisant, Shneiderman and Lazar, 2008</span></li>
+      <li><span class="num">35 people</span> took part in a second study, 20 of them blind. They explored sound maps by keyboard or tablet, then picked the matching raised map with high accuracy. Blind and sighted groups did equally well. <span class="note">Delogu and others, 2010</span></li>
+      <li><span class="num">3,184 people</span> answered a survey after hearing NASA's own sonifications. Sighted and blind or low-vision listeners reported that they learned from them and enjoyed them. <span class="note">Arcand and others, 2024</span></li>
+    </ul>
+    <div class="research-how">
+      <div class="bandrow"><span class="when">Three ways in</span><span class="what"><span class="strong">A sweep, speech and exploring by keys work together.</span> Earshot gives all three: the sweep, a spoken briefing, and a map you can walk with the arrow keys. <span class="note">Zhao and others, 2008</span></span></div>
+      <div class="bandrow"><span class="when">Four voices</span><span class="what"><span class="strong">Following three or more steady sounds at once is very hard.</span> Even four is more than three, so Earshot offers one band at a time, where you only ever follow one. Four together, its starting point, is a middle ground between that and eight; its four notes are chosen so that none is an overtone of the lowest, which helps them stay apart. <span class="note">Flowers, 2005</span></span></div>
+      <div class="bandrow"><span class="when">Shimmer</span><span class="what"><span class="strong">Sounds that each move in their own pattern are easier to keep apart.</span> So each voice has its own slow shimmer. Each kind of map also has its own instrument, so records are easy to tell apart. <span class="note">Flowers, 2005; Walker and Nees, 2011</span></span></div>
+      <div class="bandrow"><span class="when">Brighter</span><span class="what"><span class="strong">Loudness is a weak way to carry a number.</span> Loudness still carries Earshot's values, so a fuller voice is made brighter as well, and the numbers themselves are always available in words. <span class="note">Neuhoff, 2011; Flowers, 2005</span></span></div>
+      <div class="bandrow"><span class="when">Time first</span><span class="what"><span class="strong">Only one of seven blind users consciously used left and right.</span> So time is the main guide from west to east, and the move between your ears only backs it up. <span class="note">Zhao and others, 2008</span></span></div>
+      <div class="bandrow"><span class="when">One mapping</span><span class="what"><span class="strong">Blind and sighted listeners agree on which way a sound should move.</span> In a study with 45 legally blind listeners, the two groups' choices matched closely. Earshot uses one mapping for everyone. <span class="note">Walker and Mauney, 2010</span></span></div>
+      <div class="bandrow"><span class="when">Before us</span><span class="what"><span class="strong">Earshot stands on earlier work, and adds to it.</span> NASA's own sonifications sweep across pictures so they can be heard. "Planetary Bands, Warming World" gave each band of latitude its own instrument. Arcobaleno, a 2023 Space Apps global winner, turned the colours of NASA images into music for people with sight impairments. Earshot adds five things: it reads the number behind each colour from NASA's own colour tables; it checks every sound against its map; it plays the area around your own place and says how far away and which way the most is, every day in a podcast app; it makes sound files that turn back into maps; and it lets you hear only what changed. <span class="note">NASA Chandra and SVS 13786; St. George and others, 2017; NASA, 2023 Space Apps global winners</span></span></div>
+      <div class="bandrow"><span class="when">Open check</span><span class="what"><span class="strong">Few sonification projects publish any measured evaluation.</span> Earshot publishes a machine check of its own sound for every map, and a listening check anyone can take. <span class="note">Zanella and others, 2022</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="field f-yellow" id="how" aria-labelledby="h-how">
+  <div class="grid">
+    <div class="how-head" data-rise>
+      <h2 id="h-how">Picture to sound in three steps.</h2>
+      <p>One short formula turns any colour-coded map into the same kind of music, every time. It lives in one file that anyone can read and reuse.</p>
+    </div>
+    <figure class="how-video">
+      <video controls preload="none" poster="demo-poster.jpg" src="demo.mp4" width="1280" height="720" aria-label="Earshot in 29 seconds, with sound and captions"></video>
+      <figcaption>Earshot in 29 seconds: ocean heat and city lights from NASA's Earth Information Center, played as sound. <a href="demo.html">Read what happens in the video</a>.</figcaption>
+    </figure>
+    <div class="tiles">
+      <figure class="tile t1" data-rise>
+        <div class="tile-box f-ink"><img id="how-img" alt="The NASA map for the record you chose." width="1024" height="512"></div>
+        <figcaption><span class="strong">NASA draws the map</span> Each colour on a NASA map stands for a number. For the day-by-day records Earshot looks every colour up in NASA's own colour table; for the Earth Information Center pictures it reads the colour bar NASA prints beside them.</figcaption>
+      </figure>
+      <figure class="tile t2" data-rise>
+        <div class="tile-box f-ink"><canvas id="how-grid" role="img" aria-label="The same map reduced to eight rows and seventy-two columns."></canvas></div>
+        <figcaption><span class="strong">Eight bands are measured</span> The planet is cut into eight bands from south to north, and 72 slices from west to east. Each cell holds the average for that patch.</figcaption>
+      </figure>
+      <figure class="tile t3" data-rise>
+        <div class="tile-box f-ink"><canvas id="how-voices" role="img" aria-label="Eight bars, one for each voice, from the lowest note for the Antarctic to the highest for the Arctic."></canvas></div>
+        <figcaption><span class="strong">Eight voices sing them</span> Each band gets its own note, low for the south and high for the north. More smoke, rain or heat makes that voice louder, as the sound sweeps from your left ear to your right. Every record has its own instrument, and rain and lightning add a rhythm.
+        <span class="row">
+          <button id="scale-demo" class="btn" type="button">Hear the eight voices</button>
+          <button class="info" type="button" data-info="voices" aria-label="Why these eight notes?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+        </span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="field f-coral" id="proof" aria-labelledby="h-proof">
+  <div class="grid">
+    <div class="proof-head" data-rise>
+      <h2 id="h-proof">Does the sound really carry the map?</h2>
+      <p class="figure"><span id="proof-r">0.0000</span> <span class="figure-of">out of 1</span>
+        <button class="info" type="button" data-info="match" aria-label="What does this number mean?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button></p>
+      <p id="proof-line" class="lead"></p>
+      <p>This is a matched check. The second program knows the eight pitches and the timing, and it needs both ears of a clean recording. It shows that the grid of values survives the trip into sound and back. It does not cover the rhythm or the hiss, and it does not test loudspeakers, rooms or ears.</p>
+    </div>
+    <div class="proof-strips" data-rise>
+      <figure><canvas id="proof-in" role="img" aria-label="The map levels that went into the sound."></canvas><figcaption>What went into the sound</figcaption></figure>
+      <figure><canvas id="proof-out" role="img" aria-label="The map levels a program recovered from the sound alone."></canvas><figcaption>What a program heard back, from the audio alone</figcaption></figure>
+    </div>
+    <div class="proof-notes" data-rise>
+      <dl>
+        <div><dt>Average error</dt><dd id="proof-err"></dd></div>
+        <div><dt>Cells checked</dt><dd id="proof-cells"></dd></div>
+        <div><dt>Colour reading</dt><dd id="proof-exact"></dd></div>
+      </dl>
+      <div>
+        <h3>What this check covers</h3>
+        <p>It shows that the sound holds the map, for every record and for your own files. What listeners can do with sound maps is the subject of the <a href="#research">studies above</a>, and you can test your own ear in the <a href="#ears">listening check</a>.</p>
+        <p class="note">Sources: Zanella and others, "Sonification and Sound Design for Astronomy Research, Education and Public Engagement", Nature Astronomy, 2022. The eight latitude bands follow "Planetary Bands, Warming World", a 2015 string quartet by Daniel Crawford and Scott St. George, described in the Bulletin of the American Meteorological Society, 2017. Sweeping across a picture and turning position into pitch and brightness into loudness is the approach of NASA's own sonifications, such as "Caldwell 73" (Scientific Visualization Studio 13786), where the sweep turns like a radar and distance from the centre sets the pitch.</p>
+      </div>
+      <div>
+        <h3>Take the evidence with you</h3>
+        <div class="row wrap">
+          <button class="quiet" type="button" data-download="proof">Proof (JSON)</button>
+          <button class="quiet" type="button" data-download="csv">Band data (CSV)</button>
+          <button class="quiet" type="button" data-download="png">Map (PNG)</button>
+          <button class="quiet" type="button" data-download="brief">Briefing (TXT)</button>
+          <button class="quiet" type="button" data-download="wav">Sound (WAV)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band f-ink" aria-label="Where the data comes from">
+  <div class="marquee" aria-hidden="true"><div class="track">
+    <span>NASA GIBS</span><span>OMPS on NOAA-21</span><span>VIIRS on NOAA-20</span><span>IMERG</span><span>GHRSST MUR</span><span>Earth Information Center</span><span>GEOS-CF</span><span>Lightning Imaging Sensor</span>
+    <span>NASA GIBS</span><span>OMPS on NOAA-21</span><span>VIIRS on NOAA-20</span><span>IMERG</span><span>GHRSST MUR</span><span>Earth Information Center</span><span>GEOS-CF</span><span>Lightning Imaging Sensor</span>
+  </div></div>
+</section>
+<section class="sources" id="sources" aria-labelledby="h-sources">
+  <div class="grid">
+    <div class="sources-head" data-rise>
+      <h2 id="h-sources">The maps, as NASA draws them.</h2>
+      <p id="sources-lead">Every sound on this page starts as one of these pictures. Some are frames from the Earth Information Center, the wall of screens at NASA headquarters. Four are fetched from NASA's GIBS map service for the day you choose.</p>
+    </div>
+    <div class="shots" id="shots">
+      <figure><div class="shot f-ink"><img src="records/live/rain.png" alt="World map of rain rate: bands of green, yellow and red rain across the tropics and the storm tracks." width="1024" height="512" loading="lazy"></div><figcaption><span class="strong">Rain</span> IMERG, 13 November 2026</figcaption></figure>
+      <figure><div class="shot f-ink"><img src="records/live/sea.png" alt="World map of sea surface temperature: warm reds along the equator fading to cold blues at the poles, with the continents left empty." width="1024" height="512" loading="lazy"></div><figcaption><span class="strong">Sea temperature</span> GHRSST MUR, 13 November 2026</figcaption></figure>
+      <figure><div class="shot f-ink"><img src="records/live/haze.png" alt="World map of haze: orange and brown patches where the air carries more fine particles, with gaps where cloud hid the ground." width="1024" height="512" loading="lazy"></div><figcaption><span class="strong">Haze</span> VIIRS on NOAA-20, 13 November 2026</figcaption></figure>
+      <figure><div class="shot f-ink"><img src="records/live/smoke.png" alt="World map of the aerosol index in yellow and red stripes, one stripe for each pass of the satellite." width="1024" height="512" loading="lazy"></div><figcaption><span class="strong">Smoke and dust</span> OMPS on NOAA-21, 13 November 2026</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="field f-yellow" id="yours" aria-labelledby="h-yours">
+  <div class="grid yours">
+    <div data-rise>
+      <div class="heading-row">
+        <h2 id="h-yours">Bring your own map.</h2>
+        <button class="info" type="button" data-info="byo" aria-label="What kind of file works?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <p class="lead">Drop in a whole-world map picture or a table of numbers. It is read inside your browser, sent nowhere, and gets the same voices, the same briefing and the same proof.</p>
+      <p>No file to hand? <button class="link" type="button" data-download="points">Download this map as a table</button>, then load it back in.</p>
+      <p>A sound is a map too. <button class="link" type="button" data-download="wav">Download this map's sound</button>, drop the sound file in here, and Earshot draws the map again from the audio alone. A map can travel as a sound file that a blind person and a sighted person can both read.</p>
+    </div>
+    <form id="byo-form" data-ui data-rise>
+      <label for="byo-file">A map picture (PNG or JPG), a table (CSV with lat, lon, value), or an Earshot sound file (WAV)</label>
+      <input id="byo-file" type="file" accept="image/png,image/jpeg,image/webp,.csv,text/csv,.wav,audio/wav,audio/x-wav">
+      <div class="two">
+        <label>What is being measured
+          <input id="byo-noun" type="text" placeholder="temperature"></label>
+        <label>Unit
+          <input id="byo-unit" type="text" placeholder="degrees Celsius"></label>
+      </div>
+      <div class="row">
+        <label class="grow">How to read a picture's colours
+          <select id="byo-scale">
+            <option value="brightness">By brightness: dark is low, bright is high</option>
+            <option value="two">Between two colours I choose</option>
+            <option value="pm25">With NASA's fine-particle legend</option>
+          </select></label>
+        <button class="info" type="button" data-info="scale" aria-label="How do I choose a colour scale?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+      </div>
+      <div id="byo-two" class="two" hidden>
+        <label>Colour for the lowest value <input id="byo-c1" type="color" value="#fff5b9"></label>
+        <label>Colour for the highest value <input id="byo-c2" type="color" value="#682606"></label>
+        <label>Lowest value <input id="byo-lo" type="number" step="any" value="0"></label>
+        <label>Highest value <input id="byo-hi" type="number" step="any" value="100"></label>
+      </div>
+      <button class="btn" type="submit">Turn it into sound</button>
+      <p id="byo-status" class="result" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="field f-ink" id="build" aria-labelledby="h-build">
+  <div class="grid agenda">
+    <div class="agenda-head" data-rise>
+      <h2 id="h-build">Put Earshot inside your own product.</h2>
+      <p id="api-state" class="note" aria-live="polite">Checking whether the API is running here</p>
+    </div>
+    <div id="api-tabs" class="daytabs" role="tablist" aria-label="Ways to use Earshot">
+      <button role="tab" type="button" id="tab-http" aria-controls="panel-http" aria-selected="true" data-tab="http">Over the web <span>HTTP API with a key</span></button>
+      <button role="tab" type="button" id="tab-js" aria-controls="panel-js" aria-selected="false" tabindex="-1" data-tab="js">In a web page <span>one JavaScript file</span></button>
+      <button role="tab" type="button" id="tab-mcp" aria-controls="panel-mcp" aria-selected="false" tabindex="-1" data-tab="mcp">For AI assistants <span>MCP server</span></button>
+      <button role="tab" type="button" id="tab-stack" aria-controls="panel-stack" aria-selected="false" tabindex="-1" data-tab="stack">What runs it <span>every part, named</span></button>
+    </div>
+    <div class="bands" data-ui>
+      <div data-panel="http" id="panel-http" role="tabpanel" aria-labelledby="tab-http">
+        <div class="bandrow"><span class="when">POST</span><span class="what"><span class="strong">/api/v1/keys</span> Get a free key. No sign-up.</span></div>
+        <div class="bandrow"><span class="when">GET</span><span class="what"><span class="strong">/api/v1/records</span> The live records and what each one measures.</span></div>
+        <div class="bandrow"><span class="when">POST</span><span class="what"><span class="strong">/api/v1/brief</span> A spoken-style briefing for a record, a day and a place.</span></div>
+        <div class="bandrow"><span class="when">GET</span><span class="what"><span class="strong">/feed.xml</span> A daily audio feed for podcast apps: the newest day of each satellite record, as sound with its briefing. No key needed. <a href="feed.xml">Open the feed</a></span></div>
+        <div class="bandrow"><span class="when">POST</span><span class="what"><span class="strong">/api/v1/sonify</span> Send a record or your own grid of numbers, get back a WAV file with the proof numbers.</span></div>
+        <div class="try">
+          <div class="row wrap">
+            <button id="api-key" class="btn" type="button" disabled>Get a key</button>
+            <code id="api-key-out">no key yet</code>
+            <button id="api-run" class="btn" type="button" disabled>Run a real call</button>
+            <button class="info" type="button" data-info="api" aria-label="What does the API do?"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="5.2" r="1.5"/><rect x="8.7" y="8.3" width="2.6" height="7.4" rx="1.3"/></svg></button>
+          </div>
+          <pre id="api-out" tabindex="0">curl -X POST https://your-host/api/v1/brief \
+  -H "authorization: Bearer YOUR_KEY" -H "content-type: application/json" \
+  -d '{"record":"smoke","date":"2026-11-13","place":"Charlotte"}'</pre>
+        </div>
+      </div>
+      <div data-panel="js" id="panel-js" role="tabpanel" aria-labelledby="tab-js" hidden>
+        <div class="bandrow"><span class="when">decode</span><span class="what">Colours to numbers, using a NASA colour table or your own legend.</span></div>
+        <div class="bandrow"><span class="when">toGrid</span><span class="what">Numbers to eight bands by 72 slices, weighted by true area.</span></div>
+        <div class="bandrow"><span class="when">sonify</span><span class="what">The grid to stereo sound, with a tuning note at the start. Choose an instrument and a rhythm.</span></div>
+        <div class="bandrow"><span class="when">listenBack</span><span class="what">Sound back to a grid, so you can check your own data survived.</span></div>
+        <pre tabindex="0">import * as Earshot from './engine/earshot.js';
+
+const field  = Earshot.decode(pixels, width, height, colourTable);
+const grid   = Earshot.toGrid(field.values, field.valid, width, height);
+const levels = Earshot.toLevels(grid, 0, 4);
+const audio  = Earshot.sonify(levels, { seconds: 12, timbre: 'reed' });
+const check  = Earshot.compare(levels, Earshot.listenBack(audio));
+console.log(check.r);            // how much of the map the sound kept
+download(Earshot.toWav(audio));  // a normal WAV file</pre>
+      </div>
+      <div data-panel="mcp" id="panel-mcp" role="tabpanel" aria-labelledby="tab-mcp" hidden>
+        <div class="bandrow"><span class="when">list_records</span><span class="what">What Earshot can read today.</span></div>
+        <div class="bandrow"><span class="when">describe_map</span><span class="what">The briefing for a record and a day, with coverage and limits.</span></div>
+        <div class="bandrow"><span class="when">value_at</span><span class="what">The reading over one city or one latitude and longitude.</span></div>
+        <div class="bandrow"><span class="when">sonify_map</span><span class="what">Writes the WAV file and returns the proof numbers.</span></div>
+        <p>MCP is a standard way to give an AI assistant a tool. With this server connected, any assistant that supports MCP can answer "is there smoke over Charlotte?" from NASA's map instead of guessing.</p>
+        <pre tabindex="0">{ "mcpServers": { "earshot": { "command": "node", "args": ["mcp/earshot-mcp.mjs"] } } }</pre>
+      </div>
+      <div data-panel="stack" id="panel-stack" role="tabpanel" aria-labelledby="tab-stack" hidden>
+        <div class="bandrow"><span class="when">Data</span><span class="what"><span class="strong">NASA GIBS</span> Live map pictures and the official colour tables, fetched straight from NASA by your browser.</span></div>
+        <div class="bandrow"><span class="when">Data</span><span class="what"><span class="strong">NASA Earth Information Center</span> <span id="stack-eic">Frames of its visualizations, from NASA's Scientific Visualization Studio.</span></span></div>
+        <div class="bandrow"><span class="when">Sound</span><span class="what"><span class="strong">Web Audio API</span> Plays the samples the engine computes. No sound files are stored.</span></div>
+        <div class="bandrow"><span class="when">Voice</span><span class="what"><span class="strong">Web Speech API</span> Reads the briefing aloud and, where the browser allows, listens to a spoken question.</span></div>
+        <div class="bandrow"><span class="when">Page</span><span class="what"><span class="strong">Plain HTML, CSS and JavaScript</span> No framework and no build step, so it loads fast on a cheap phone.</span></div>
+        <div class="bandrow"><span class="when">Server</span><span class="what"><span class="strong">Node.js, no packages</span> The API and the MCP server reuse the same engine file as the page.</span></div>
+        <div class="bandrow"><span class="when">Type</span><span class="what"><span class="strong">Outfit</span> An open typeface under the SIL Open Font License.</span></div>
+        <div class="bandrow"><span class="when">Tools</span><span class="what"><span class="strong">An AI coding assistant</span> Used to research, plan and write the code and text, as declared in the README and the submission. No AI model runs inside the product.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="h-faq">
+  <div class="faq-head f-green"><div class="grid"><h2 id="h-faq" data-rise>Straight answers.</h2></div></div>
+  <div class="qa"><div class="grid"><h3>What is Earshot, in one breath?</h3><p>A jukebox that plays NASA's maps as music. Eight voices stand for eight bands of the planet from south to north. Where there is more smoke, rain, light or heat, that voice gets louder, and each kind of map has its own instrument.</p></div></div>
+  <div class="qa alt"><div class="grid"><h3>Who is it for?</h3><p>People who are blind or have low vision, who are shut out when information about the planet arrives as a picture. In Charlotte alone about 28,000 people are blind or have serious difficulty seeing even with glasses, and 8.6 million across the United States (US Census Bureau, American Community Survey, 2024). Worldwide in 2020, about 43 million people were blind and 295 million more had moderate or severe vision impairment (The Lancet Global Health, 2021). It also serves anyone who cannot look at a screen, and students who learn better by ear.</p></div></div>
+  <div class="qa"><div class="grid"><h3>How would people actually get it?</h3><p>Through tools they already use. A podcast feed delivers the area around their own city every day, as WAV sound files with the words underneath; some podcast apps, including Apple Podcasts, cannot play WAV yet. The website works with a screen reader, a keyboard or a phone. A teacher can run a twenty-minute class from the <a href="teachers.html">teachers' guide</a>. "Play the whole jukebox" turns any speaker beside a screen, such as one next to the Earth Information Center wall, into a listening post. Developers can add it to their own apps through the open API, and AI assistants can read NASA's maps through the MCP server. Everything is free and open source.</p></div></div>
+  <div class="qa"><div class="grid"><h3>Is the data real, and is it current?</h3><p>Yes. Four records are fetched from NASA's GIBS map service for the day you choose. The newest day NASA has published is usually one or two days old, and the page always says which day you are hearing. The other records are frames of NASA's Earth Information Center visualizations. If NASA's service cannot be reached, the page says so and plays a saved copy.</p></div></div>
+  <div class="qa alt"><div class="grid"><h3>How do I know the sound is right?</h3><p>Three things stand behind it. The design follows published studies of sound maps with blind and sighted listeners, listed above. The page checks itself in front of you: a second program is given the audio alone and rebuilds the map, and the match is shown for every record and for your own files. And the listening check lets you test your own ear against the data.</p></div></div>
+  <div class="qa"><div class="grid"><h3>Is it a weather or air-quality alert?</h3><p>No. It tells you what NASA's map shows in broad strokes: 288 patches of the planet with four voices, or 576 with eight, not every pixel, with the exact value over any city on request. Satellites see the whole depth of the air, not the air at your door, and cloud leaves gaps. Earshot marks gaps with a hiss instead of filling them in.</p></div></div>
+  <div class="qa alt"><div class="grid"><h3>Was AI used to build it?</h3><p>Yes, heavily, and it is declared in the submission. An AI assistant (Claude, from Anthropic) researched the challenge and earlier work, proposed approaches and wrote most of the code and text. The team chose the challenge, the audience and the direction, and decided what stayed. No image, video or sound here was made by generative AI: every sound is computed from NASA data by an open formula you can read in one file, and no AI model runs inside the product.</p></div></div>
+</section>
+</main>
+
+<footer class="foot f-ink">
+  <p class="foot-name" aria-hidden="true">Earshot</p>
+  <div class="grid foot-grid">
+    <ul class="plain foot-places">
+      <li><a href="#jukebox">Play a record</a></li>
+      <li><a href="#place-section">Ask about a place</a></li>
+      <li><a href="#yours">Bring your own map</a></li>
+      <li><a href="feed.xml">Daily audio feed</a></li>
+      <li><a href="demo.html">The 30-second demo</a></li>
+      <li><a href="slides.html">Seven slides</a></li>
+      <li><a href="teachers.html">For teachers</a></li>
+    </ul>
+    <div class="foot-cols">
+      <ul class="plain"><li class="strong">NASA sources</li>
+        <li><a href="https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api">GIBS map service</a></li>
+        <li><a href="https://svs.gsfc.nasa.gov/gallery/earth-information-center/">Earth Information Center gallery</a></li>
+        <li><a href="https://svs.gsfc.nasa.gov/13786/">Caldwell 73 sonification, SVS 13786</a></li></ul>
+      <ul class="plain" id="foot-svs"><li class="strong">Earth Information Center</li></ul>
+      <ul class="plain"><li class="strong">Research</li>
+        <li><a href="https://arxiv.org/abs/2206.13536">Sonification review, 2022</a></li>
+        <li><a href="https://journals.ametsoc.org/bams/article/98/1/23/69577/Making-Climate-Data-Sing-Using-Music-like">Making Climate Data Sing, 2017</a></li>
+        <li><a href="https://doi.org/10.1016/S2214-109X(20)30425-3">Vision loss worldwide, 2021</a></li>
+        <li><a href="https://censusreporter.org/data/table/?table=B18103&geo_ids=16000US3712000,01000US">Vision difficulty in Charlotte, US Census 2024</a></li>
+        <li><a href="https://science.nasa.gov/directorates/smd/2023-nasa-international-space-apps-challenge-announces-10-global-winners/">Space Apps 2023 global winners</a></li>
+        <li><a href="https://doi.org/10.1145/1352782.1352786">Sound maps for blind users, 2008</a></li>
+        <li><a href="https://doi.org/10.3109/17483100903100277">Exploring maps without sight, 2010</a></li>
+        <li><a href="https://doi.org/10.3389/fcomm.2024.1288896">A Universe of Sound, 2024</a></li>
+        <li><a href="https://doi.org/10.1145/1714458.1714459">Auditory graphs for blind listeners, 2010</a></li>
+        <li><a href="https://www.icad.org/Proceedings/2005/Flowers2005.pdf">Thirteen years of auditory graphing, 2005</a></li>
+        <li><a href="https://sonification.de/handbook/">The Sonification Handbook, 2011</a></li></ul>
+      <ul class="plain"><li class="strong">Project</li>
+        <li>Team USV</li>
+        <li>2026 NASA Space Apps Challenge, Charlotte</li>
+        <li>Challenge: The Earth Information Jukebox</li>
+        <li>Open source, Apache 2.0</li></ul>
+    </div>
+    <p class="note foot-legal">Earshot is an independent hackathon project. It is not made or endorsed by NASA. Map pictures are NASA data. The NASA logo printed on one frame has been covered, because this project may not use NASA branding. Type: Outfit, under the SIL Open Font License. Written with AI assistance, as declared above.</p>
+    <a class="note foot-top" href="#top">Back to the top</a>
+  </div>
+</footer>
+
+<div id="info-pop" class="pop" role="tooltip" hidden>
+  <p id="info-title" class="strong"></p>
+  <p id="info-body"></p>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
